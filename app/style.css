@@ -111,6 +111,7 @@ h1 {
   border: 1px solid var(--border);
   padding: 1.25rem 1.5rem;
   transition: border-color .2s;
+  text-align: center;
 }
 .card:hover { border-color: var(--accent2); }
 
@@ -134,6 +135,7 @@ h1 {
   border: 1px solid var(--border);
   border-radius: 2px;
   display: inline-block;
+  margin: 0 auto;
 }
 
 .running .status-badge { border-color: var(--green); color: var(--green); }
