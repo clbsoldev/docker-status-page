@@ -92,10 +92,17 @@ main { flex: 1; padding: 2.5rem 2rem; max-width: 1200px; margin: 0 auto; width: 
   width: 32px; height: 1px; background: var(--accent);
 }
 
+h1 {
+  font-family: var(--mono);
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  font-weight: 600; color: var(--text-head);
+  line-height: 1.15; margin-bottom: 2.5rem; letter-spacing: -.02em;
+}
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 240px));
+  gap: 1rem;
 }
 
 /* ── CARD — matches shared .card pattern ── */

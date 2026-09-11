@@ -55,7 +55,8 @@ def render_html(containers):
         </div>
     </header>
     <main>
-        <div class="eyebrow">docker status page</div>
+        <div class="eyebrow">container monitoring</div>
+        <h1>Docker Status Page</h1>
         <div class="grid">{cards}</div>
     </main>
     <footer>Auto-refresh every {REFRESH_INTERVAL}s</footer>
