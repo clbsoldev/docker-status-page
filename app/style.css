@@ -1,98 +1,143 @@
+/* ── docker status page · aligned with clbsoldev shared stylesheet ── */
+
+:root {
+  --bg:        #0a0e14;
+  --surface:   #111620;
+  --border:    #1e2a3a;
+  --accent:    #00d4ff;
+  --accent2:   #0077a8;
+  --text:      #c8d8e8;
+  --text-dim:  #5a7a94;
+  --text-head: #e8f4ff;
+  --green:     #00e5a0;
+  --orange:    #ff8c42;
+  --red:       #ff4d6d;
+  --mono:      'IBM Plex Mono', monospace;
+  --sans:      'IBM Plex Sans', sans-serif;
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: #0f0f0f;
-    color: #e0e0e0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* ── Header ─────────────────────────────────────────────────────────────── */
+/* Scanline overlay — matches shared site texture */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,.08) 2px, rgba(0,0,0,.08) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── HEADER — mirrors .site-nav brand pattern ("// CLBSOLDEV") ── */
 header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 20px 24px;
-    background: #1a1a1a;
-    border-bottom: 1px solid #2a2a2a;
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10,14,20,.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .5rem;
+  padding: .9rem 2rem;
 }
 
-.logo {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: #2563eb;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: 1px;
-    flex-shrink: 0;
+.brand {
+  font-family: var(--mono);
+  font-size: .85rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: baseline;
+  gap: .6rem;
 }
 
-.header-text h1 { font-size: 18px; font-weight: 600; color: #fff; }
-.subtitle       { font-size: 12px; color: #888; margin-top: 3px; }
+.brand .slashes { color: var(--text-dim); }
+.brand .initials { color: var(--accent); }
+.brand .host-name { color: var(--text-head); font-weight: 600; }
 
-/* ── Grid ───────────────────────────────────────────────────────────────── */
-main { flex: 1; padding: 24px; }
+.status-meta {
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.status-meta .count { color: var(--green); }
+.status-meta #countdown { color: var(--accent); }
+
+/* ── MAIN / GRID ── */
+main { flex: 1; padding: 2.5rem 2rem; max-width: 1200px; margin: 0 auto; width: 100%; }
+
+.eyebrow {
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .2em;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: .75rem;
+}
+.eyebrow::before {
+  content: ''; display: inline-block;
+  width: 32px; height: 1px; background: var(--accent);
+}
 
 .grid {
-    display: grid;
-    gap: 14px;
-    grid-template-columns: 1fr; /* mobile: 1 column */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
 }
 
-@media (min-width: 480px) {
-    .grid { grid-template-columns: repeat(2, 1fr); } /* tablet: 2 columns */
-}
-
-@media (min-width: 768px) {
-    .grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); } /* desktop */
-}
-
-/* ── Card ───────────────────────────────────────────────────────────────── */
+/* ── CARD — matches shared .card pattern ── */
 .card {
-    background: #1a1a1a;
-    border: 1px solid #2a2a2a;
-    border-radius: 10px;
-    padding: 18px 14px;
-    text-align: center;
-    transition: transform 0.1s;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.25rem 1.5rem;
+  transition: border-color .2s;
 }
-
-.card:hover { transform: translateY(-2px); }
+.card:hover { border-color: var(--accent2); }
 
 .card-name {
-    font-size: 14px;
-    font-weight: 600;
-    color: #fff;
-    word-break: break-word;
-    margin-bottom: 8px;
+  font-family: var(--mono);
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text-head);
+  letter-spacing: .02em;
+  word-break: break-word;
+  margin-bottom: .9rem;
 }
 
-.card-status {
-    font-size: 11px;
-    font-weight: 500;
-    padding: 3px 10px;
-    border-radius: 20px;
-    display: inline-block;
+/* ── STATUS BADGE — matches shared .badge pattern ── */
+.status-badge {
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .3rem .75rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  display: inline-block;
 }
 
-.running  { border-color: #4caf50; }
-.stopped  { border-color: #f44336; }
+.running .status-badge { border-color: var(--green); color: var(--green); }
+.stopped .status-badge  { border-color: var(--red);   color: var(--red); }
 
-.running .card-status  { background: rgba(76,175,80,.15);  color: #4caf50; }
-.stopped .card-status  { background: rgba(244,67,54,.15);  color: #f44336; }
-
-/* ── Footer ─────────────────────────────────────────────────────────────── */
+/* ── FOOTER — matches shared .site-footer ── */
 footer {
-    text-align: center;
-    padding: 14px;
-    font-size: 11px;
-    color: #444;
-    border-top: 1px solid #1a1a1a;
+  border-top: 1px solid var(--border);
+  padding: 1.25rem 2rem;
+  font-family: var(--mono);
+  font-size: .68rem;
+  color: var(--text-dim);
+  text-align: center;
 }

@@ -20,7 +20,7 @@ def render_html(containers):
     cards = "".join(
         f'<div class="card {"running" if c.status == "running" else "stopped"}">'
         f'<div class="card-name">{c.name}</div>'
-        f'<div class="card-status">{c.status}</div>'
+        f'<div class="status-badge">{c.status}</div>'
         f"</div>"
         for c in containers
     )
@@ -31,23 +31,31 @@ def render_html(containers):
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="{REFRESH_INTERVAL}">
-    <title>{HOST_NAME}</title>
+    <title>{HOST_NAME} — Docker Status Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#0f0f0f">
+    <meta name="theme-color" content="#0a0e14">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="{HOST_NAME}">
 </head>
 <body>
     <header>
-        <div class="logo" aria-hidden="true">{HOST_INITIALS}</div>
-        <div class="header-text">
-            <h1>{HOST_NAME}</h1>
-            <p class="subtitle">{running}/{total} running &mdash; refresh in <span id="countdown">{REFRESH_INTERVAL}</span>s</p>
+        <div class="brand">
+            <span class="slashes">//</span>
+            <span class="initials">{HOST_INITIALS}</span>
+            <span class="host-name">{HOST_NAME}</span>
+        </div>
+        <div class="status-meta">
+            <span class="count">{running}/{total} running</span> &middot;
+            refresh in <span id="countdown">{REFRESH_INTERVAL}</span>s
         </div>
     </header>
     <main>
+        <div class="eyebrow">docker status page</div>
         <div class="grid">{cards}</div>
     </main>
     <footer>Auto-refresh every {REFRESH_INTERVAL}s</footer>
