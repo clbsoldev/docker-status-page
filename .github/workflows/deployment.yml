@@ -21,4 +21,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy app files
-        run: rsync -av --delete app/ "/opt/docker/${RUNNER_NAME}_statuspage/config/"
+        run: rsync -av --delete app/ "/opt/docker/${RUNNER_NAME}_statuspage/app/"
