@@ -1,0 +1,23 @@
+---
+name: Deploy Status Page
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "app/**"
+
+jobs:
+  deploy-status-page:
+    name: 'Status Page Deployment on Docker Hosts'
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      matrix:
+        runner: [hau-app01]   # add more docker_host runners here as they join
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy app files
+        run: cp -v app/* "/opt/docker/${RUNNER_NAME}_statuspage/config/"
