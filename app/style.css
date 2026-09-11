@@ -105,6 +105,10 @@ h1 {
   gap: 1rem;
 }
 
+@media (max-width: 600px) {
+  .grid { justify-content: center; }
+}
+
 /* ── CARD — matches shared .card pattern ── */
 .card {
   background: var(--surface);
