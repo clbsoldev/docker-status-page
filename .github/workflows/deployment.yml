@@ -18,7 +18,7 @@ jobs:
         runner: [hau-app01]   # add more docker_host runners here as they join
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Deploy app files
         run: rsync -av --delete app/ "/opt/docker/${RUNNER_NAME}_statuspage/app/"
