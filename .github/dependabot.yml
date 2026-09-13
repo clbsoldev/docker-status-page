@@ -7,6 +7,8 @@ updates:
       interval: "weekly"
       day: "sunday"
     open-pull-requests-limit: 5
+    assignees:
+      - "clbsoldev/docker-admins"
     commit-message:
       prefix: "chore(actions)"
     labels:
