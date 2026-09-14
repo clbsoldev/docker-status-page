@@ -98,6 +98,7 @@ h1 {
   font-weight: 600; color: var(--text-head);
   line-height: 1.15; margin-bottom: 2.5rem; letter-spacing: -.02em;
 }
+h1 .accent { color: var(--accent); }
 
 .grid {
   display: grid;
@@ -154,4 +155,3 @@ footer {
   color: var(--text-dim);
   text-align: center;
 }
- 
